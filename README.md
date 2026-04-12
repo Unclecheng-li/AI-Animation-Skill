@@ -29,12 +29,13 @@
 输入一段技术科普文本，AI 自动生成演示动画：
 
 ```
-用户输入：OSI 七层模型是什么？
+用户输入：OSI 七层模型是什么？(相关科普文档)
 
 Step 1 → 生成 7 页基础 HTML 幻灯片
 Step 2 → 选择模板重构（PPT 风格 / 流程图风格）
 Step 3 → 输出炫酷的动画演示文件
 ```
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/c09e0f57-7f5a-4014-8809-b5e99d11e9f5" />
 
 适用于 B 站视频素材、课堂教学、技术分享等场景。
 
@@ -42,7 +43,7 @@ Step 3 → 输出炫酷的动画演示文件
 
 ## 快速开始
 
-### 安装
+### 安装 (Workbuddy)
 
 ```
 1. 下载本项目
@@ -86,11 +87,13 @@ Step 3 → 输出炫酷的动画演示文件
 
 ### PPT 风格（模板重构后）
 
-![PPT 风格](web_animation/AI_Animation.html)
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/6ffb76f6-0dea-4b02-b983-617a284b9c80" />
+
 
 ### 流程图风格（RNN 模板重构后）
 
-![流程图风格](web_animation/Animation/RNN-3.html)
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/5a65dd82-b690-4d1a-87ba-1b6196b01273" />
+
 
 ---
 
