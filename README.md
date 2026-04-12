@@ -88,6 +88,7 @@ Step 3 → 输出炫酷的动画演示文件
 ### PPT 风格（模板重构后）
 
 <img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/6ffb76f6-0dea-4b02-b983-617a284b9c80" />
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/8c1be8cc-8293-4893-8b56-b695e5daf6fe" />
 
 
 ### 流程图风格（RNN 模板重构后）
