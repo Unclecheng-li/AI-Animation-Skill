@@ -5,7 +5,7 @@
 > *使用 AI 生成 HTML 演示动画的工具集，让视频创作者能够快速将科普文本转换为炫酷的演示动画。*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![WorkBuddy](https://img.shields.io/badge/WorkBuddy-Skill-green)](https://codebuddy.cn)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-green)](https://openclaw.ai/)
 [![HTML5](https://img.shields.io/badge/HTML5-Demo-orange)](web_animation/)
 
 <br>
