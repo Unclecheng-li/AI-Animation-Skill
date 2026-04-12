@@ -15,7 +15,7 @@
 <br>
 
 基于整理好的 Prompt 模板集成的 Skill，
-配合 GPT-4o、Claude 等 AI 使用，
+配合 Trae、Claude、Codex 等 AI 使用，
 三步自动完成「科普文本 → 炫酷动画」的转换。
 
 [快速开始](#快速开始) · [Prompt 分类](#prompt-分类) · [效果示例](#效果示例) · [模板预览](#模板预览)
