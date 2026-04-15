@@ -455,9 +455,15 @@
     function goToSlide(index) {
         if (index < 0) index = totalSlides - 1;
         if (index >= totalSlides) index = 0;
-        
+
         slides.forEach(s => s.classList.remove('active'));
-        slides[index].classList.add('active');
+        var target = slides[index];
+        target.classList.add('active');
+        // ⚠️ 动画重置修复：克隆节点强制重新渲染CSS动画
+        target.querySelectorAll('.an, .anim-item, [style*="animation"]').forEach(function(item) {
+            var clone = item.cloneNode(true);
+            item.parentNode.replaceChild(clone, item);
+        });
         currentSlide = index;
     }
 

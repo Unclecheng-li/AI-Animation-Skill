@@ -1248,6 +1248,11 @@
                     slide.classList.remove('active');
                     if (i === index) {
                         slide.classList.add('active');
+                        // ⚠️ 动画重置修复：克隆节点强制重新渲染CSS动画
+                        slide.querySelectorAll('.animate-item, .an, [style*="animation"]').forEach(function(item) {
+                            var clone = item.cloneNode(true);
+                            item.parentNode.replaceChild(clone, item);
+                        });
                     }
                 });
 

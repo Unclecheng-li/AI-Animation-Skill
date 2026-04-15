@@ -507,16 +507,25 @@
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
 
+        // ⚠️ 动画重置修复：克隆节点强制重新渲染CSS动画
+        function resetAnimations(slide) {
+            slide.querySelectorAll('.anim-item, .an, [style*="animation"]').forEach(function(item) {
+                var clone = item.cloneNode(true);
+                item.parentNode.replaceChild(clone, item);
+            });
+        }
+
         function updateSlide() {
             slides.forEach((slide, index) => {
                 slide.classList.remove('active', 'prev');
                 if (index === currentSlide) {
                     slide.classList.add('active');
+                    resetAnimations(slide);
                 } else if (index < currentSlide) {
                     slide.classList.add('prev');
                 }
             });
-            
+
             document.getElementById('progress').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
         }
 

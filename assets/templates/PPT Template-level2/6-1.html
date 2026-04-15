@@ -12,10 +12,25 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-dark2: #12121a;
+            --bg-card: rgba(255,255,255,0.03);
+            --accent-primary: #00d4ff;
+            --accent-secondary: #7c3aed;
+            --accent-glow: rgba(0,212,255,0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --green: #00e676;
+            --red: #ff5252;
+            --orange: #ffab40;
+        }
+
         body {
             font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif;
-            background: #FFFAF5;
-            color: #2D2A26;
+            background: var(--bg-dark);
+            color: var(--text-primary);
             overflow: hidden;
             width: 100vw;
             height: 100vh;
@@ -24,6 +39,32 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
+        }
+
+        /* ===== Background Grid ===== */
+        .bg-grid {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        /* ===== Glow Orbs ===== */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            animation: orbFloat 8s ease-in-out infinite alternate;
+        }
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
         }
 
         /* ===== Slide Container ===== */
@@ -46,6 +87,7 @@
             pointer-events: none;
             transition: opacity 0.6s ease;
             overflow: hidden;
+            background: radial-gradient(ellipse at 50% 30%, var(--bg-dark2) 0%, var(--bg-dark) 100%);
         }
 
         .slide.active {
@@ -70,20 +112,22 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #FFF0E0, #FFE4CC);
-            color: #C06820;
+            background: rgba(0,212,255,0.1);
+            color: var(--accent-primary);
             padding: 8px 22px;
             border-radius: 30px;
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 20px;
             letter-spacing: 1px;
+            border: 1px solid rgba(0,212,255,0.25);
+            backdrop-filter: blur(10px);
         }
 
         .slide-title {
             font-size: 52px;
             font-weight: 900;
-            color: #2D2A26;
+            color: var(--text-primary);
             text-align: center;
             line-height: 1.35;
             margin-bottom: 16px;
@@ -91,34 +135,46 @@
 
         .slide-subtitle {
             font-size: 26px;
-            color: #8C7A68;
+            color: var(--text-secondary);
             text-align: center;
             margin-bottom: 36px;
             font-weight: 500;
         }
 
-        .highlight-orange { color: #E07A3A; font-weight: 800; }
-        .highlight-bg { background: linear-gradient(180deg, transparent 55%, #FFDBB5 55%); padding: 0 4px; }
-        .highlight-underline { text-decoration: underline; text-decoration-color: #E07A3A; text-underline-offset: 6px; text-decoration-thickness: 3px; }
-        .highlight-italic { font-style: italic; color: #B85C2A; }
+        .highlight-cyan { color: var(--accent-primary); font-weight: 800; }
+        .highlight-bg { 
+            background: linear-gradient(180deg, transparent 55%, rgba(0,212,255,0.25) 55%); 
+            padding: 0 4px; 
+        }
+        .highlight-underline { 
+            text-decoration: underline; 
+            text-decoration-color: var(--accent-primary); 
+            text-underline-offset: 6px; 
+            text-decoration-thickness: 3px; 
+        }
+        .highlight-italic { font-style: italic; color: var(--accent-secondary); }
         .text-bold { font-weight: 800; }
 
         .accent-card {
-            background: #FFF7EF;
-            border-left: 5px solid #E07A3A;
+            background: var(--bg-card);
+            border-left: 5px solid var(--accent-primary);
             border-radius: 0 16px 16px 0;
             padding: 28px 36px;
             margin: 16px 0;
             max-width: 900px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,212,255,0.15);
+            border-left-width: 5px;
         }
 
         .accent-card-warm {
-            background: linear-gradient(135deg, #FFF3E8, #FFF9F2);
-            border: 2px solid #F0D4B0;
+            background: var(--bg-card);
+            border: 1px solid rgba(124,58,237,0.3);
             border-radius: 18px;
             padding: 32px 40px;
             margin: 16px 0;
             max-width: 900px;
+            backdrop-filter: blur(10px);
         }
 
         .icon-circle {
@@ -130,16 +186,16 @@
             font-size: 36px;
             margin-bottom: 14px;
         }
-        .icon-circle.orange { background: #FFF0E0; color: #E07A3A; }
-        .icon-circle.coral { background: #FFECE4; color: #D4553A; }
-        .icon-circle.amber { background: #FFF5DC; color: #C8901A; }
-        .icon-circle.green { background: #E8F5E9; color: #4CAF50; }
+        .icon-circle.cyan { background: rgba(0,212,255,0.15); color: var(--accent-primary); }
+        .icon-circle.purple { background: rgba(124,58,237,0.15); color: var(--accent-secondary); }
+        .icon-circle.green { background: rgba(0,230,118,0.15); color: var(--green); }
+        .icon-circle.blue { background: rgba(33,150,243,0.15); color: #2196F3; }
 
         /* Decorative */
         .deco-circle {
             position: absolute;
             border-radius: 50%;
-            opacity: 0.10;
+            opacity: 0.08;
             pointer-events: none;
         }
 
@@ -173,7 +229,7 @@
         }
 
         .shimmer-text {
-            background: linear-gradient(90deg, #E07A3A, #F0B060, #E07A3A, #D4553A, #E07A3A);
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary), #7c3aed, var(--accent-primary));
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -183,11 +239,11 @@
 
         /* ===== Glow Effect ===== */
         .glow-box {
-            box-shadow: 0 0 30px rgba(224,122,58,0.15), 0 8px 32px rgba(200,130,60,0.10);
+            box-shadow: 0 0 30px rgba(0,212,255,0.1), 0 8px 32px rgba(0,212,255,0.05);
             transition: box-shadow 0.5s ease;
         }
         .glow-box:hover, .glow-box.active-glow {
-            box-shadow: 0 0 50px rgba(224,122,58,0.25), 0 12px 40px rgba(200,130,60,0.18);
+            box-shadow: 0 0 50px rgba(0,212,255,0.2), 0 12px 40px rgba(0,212,255,0.1);
         }
 
         /* ===== SLIDE 1 : Title ===== */
@@ -204,37 +260,38 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: #FFF7EF;
-            border: 2px solid #F0D4B0;
+            background: var(--bg-card);
+            border: 1px solid rgba(0,212,255,0.25);
             border-radius: 40px;
             padding: 10px 24px;
             font-size: 18px;
             font-weight: 700;
-            color: #A06030;
+            color: var(--accent-primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         .s1-logo-pill:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(224,122,58,0.15);
+            box-shadow: 0 8px 24px rgba(0,212,255,0.2);
         }
 
         .s1-big-title {
             font-size: 64px;
             font-weight: 900;
-            color: #2D2A26;
+            color: var(--text-primary);
             margin: 20px 0;
             line-height: 1.3;
         }
 
         .s1-sub {
             font-size: 28px;
-            color: #8C7A68;
+            color: var(--text-secondary);
             margin-top: 8px;
         }
 
         .kaomoji {
             font-size: 22px;
-            color: #E07A3A;
+            color: var(--accent-primary);
             letter-spacing: 2px;
             margin-top: 10px;
         }
@@ -242,7 +299,7 @@
         .s1-divider {
             width: 80px;
             height: 5px;
-            background: linear-gradient(90deg, #E07A3A, #F0B060);
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
             border-radius: 4px;
             margin: 28px auto;
         }
@@ -251,19 +308,19 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #E07A3A, #D4553A);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: white;
             padding: 12px 32px;
             border-radius: 40px;
             font-size: 22px;
             font-weight: 700;
-            box-shadow: 0 4px 20px rgba(224,122,58,0.3);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.3);
             animation: badgePulse 3s ease-in-out infinite;
         }
 
         @keyframes badgePulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(224,122,58,0.3); }
-            50% { box-shadow: 0 6px 36px rgba(224,122,58,0.5); }
+            0%, 100% { box-shadow: 0 4px 20px rgba(0,212,255,0.3); }
+            50% { box-shadow: 0 6px 36px rgba(0,212,255,0.5); }
         }
 
         /* Shield Graphic for Slide 1 */
@@ -293,30 +350,31 @@
         .s2-right { flex: 1; display: flex; justify-content: center; }
 
         .file-mockup {
-            background: #FFFCF8;
-            border: 2px solid #F0D4B0;
+            background: var(--bg-card);
+            border: 1px solid rgba(0,212,255,0.2);
             border-radius: 16px;
             padding: 0;
             width: 360px;
-            box-shadow: 0 8px 32px rgba(200,130,60,0.10);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             overflow: hidden;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            backdrop-filter: blur(10px);
         }
         .file-mockup:hover {
             transform: translateY(-6px) rotate(-1deg);
-            box-shadow: 0 16px 48px rgba(200,130,60,0.18);
+            box-shadow: 0 16px 48px rgba(0,212,255,0.15);
         }
 
         .file-mockup-header {
-            background: linear-gradient(135deg, #F7E8D6, #FFE8CC);
+            background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.1));
             padding: 14px 20px;
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 16px;
             font-weight: 700;
-            color: #A06030;
-            border-bottom: 2px solid #F0D4B0;
+            color: var(--accent-primary);
+            border-bottom: 1px solid rgba(0,212,255,0.2);
         }
 
         .file-mockup-dots {
@@ -329,9 +387,9 @@
             border-radius: 50%;
             display: inline-block;
         }
-        .file-mockup-dots span:nth-child(1) { background: #FF6B6B; }
-        .file-mockup-dots span:nth-child(2) { background: #FFD93D; }
-        .file-mockup-dots span:nth-child(3) { background: #6BCB77; }
+        .file-mockup-dots span:nth-child(1) { background: #ff5f56; }
+        .file-mockup-dots span:nth-child(2) { background: #ffbd2e; }
+        .file-mockup-dots span:nth-child(3) { background: #27ca40; }
 
         .file-mockup-body { padding: 20px 24px; }
 
@@ -341,41 +399,33 @@
             gap: 10px;
             padding: 6px 0;
             font-size: 15px;
-            color: #7A6A5A;
+            color: var(--text-secondary);
             font-family: 'Consolas', 'Courier New', monospace;
             transition: background 0.3s ease;
         }
         .file-line:hover {
-            background: #FFF5E8;
+            background: rgba(0,212,255,0.08);
             border-radius: 4px;
         }
 
         .file-line-num {
-            color: #C8A880;
+            color: var(--text-muted);
             font-size: 13px;
             width: 24px;
             text-align: right;
         }
 
         .file-line-text {
-            background: #FFF5E8;
+            background: rgba(0,212,255,0.1);
             padding: 2px 8px;
             border-radius: 4px;
+            color: var(--accent-primary);
         }
 
         .s2-text-line {
             font-size: 28px;
             line-height: 1.7;
             margin-bottom: 8px;
-        }
-
-        /* Connector Arrow SVG between left and right */
-        .s2-connector {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
         }
 
         /* ===== SLIDE 3 : 60 Lines ===== */
@@ -403,7 +453,7 @@
 
         .s3-num-label {
             font-size: 36px;
-            color: #A06030;
+            color: var(--accent-primary);
             font-weight: 700;
             text-align: left;
         }
@@ -436,13 +486,13 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 60%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 60%);
         }
 
         .s3-bar-label {
             font-size: 17px;
             font-weight: 700;
-            color: #8C7A68;
+            color: var(--text-secondary);
         }
 
         .s3-bar-status {
@@ -457,13 +507,14 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #FFF7EF;
-            border: 1px solid #F0D4B0;
+            background: var(--bg-card);
+            border: 1px solid rgba(0,212,255,0.2);
             border-radius: 20px;
             padding: 6px 18px;
             font-size: 15px;
-            color: #A06030;
+            color: var(--accent-primary);
             margin-top: 20px;
+            backdrop-filter: blur(10px);
         }
 
         /* ===== Ruler Visual for Slide 3 ===== */
@@ -485,7 +536,7 @@
             bottom: -18px;
             right: -1px;
             font-size: 12px;
-            color: #B0A090;
+            color: var(--text-muted);
             font-weight: 600;
         }
 
@@ -500,7 +551,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
+            gap: 20px;
             margin: 40px 0 30px;
             flex-wrap: wrap;
         }
@@ -514,36 +565,37 @@
             min-width: 140px;
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         .s4-ctx-block:hover {
             transform: translateY(-6px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
 
         .s4-ctx-block.task {
-            background: linear-gradient(135deg, #FFF0E0, #FFE4CC);
-            border: 2px solid #F0C090;
-            color: #A06030;
+            background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05));
+            border: 2px solid rgba(0,212,255,0.3);
+            color: var(--accent-primary);
         }
         .s4-ctx-block.code {
-            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
-            border: 2px solid #A5D6A7;
-            color: #388E3C;
+            background: linear-gradient(135deg, rgba(0,230,118,0.15), rgba(0,230,118,0.05));
+            border: 2px solid rgba(0,230,118,0.3);
+            color: var(--green);
         }
         .s4-ctx-block.docs {
-            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
-            border: 2px solid #90CAF9;
-            color: #1976D2;
+            background: linear-gradient(135deg, rgba(33,150,243,0.15), rgba(33,150,243,0.05));
+            border: 2px solid rgba(33,150,243,0.3);
+            color: #2196F3;
         }
         .s4-ctx-block.guide {
-            background: linear-gradient(135deg, #FFECE4, #FFCDD2);
-            border: 2px solid #EF9A9A;
-            color: #D32F2F;
+            background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(124,58,237,0.05));
+            border: 2px solid rgba(124,58,237,0.3);
+            color: var(--accent-secondary);
         }
 
         .s4-squeeze-arrow {
             font-size: 40px;
-            color: #D4553A;
+            color: var(--accent-secondary);
             margin: 0 -8px;
             z-index: 2;
             animation: squeezeAnim 2s ease-in-out infinite;
@@ -557,7 +609,7 @@
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            background: #F5E8D8;
+            background: rgba(255,255,255,0.05);
             border-radius: 12px;
             height: 44px;
             position: relative;
@@ -594,11 +646,11 @@
             text-align: center;
             font-weight: 800;
             font-size: 16px;
-            color: #8C7A68;
+            color: var(--text-secondary);
         }
         .s4-gauge-label .gauge-val {
             font-size: 32px;
-            color: #E07A3A;
+            color: var(--accent-primary);
         }
 
         /* ===== SLIDE 5 : Correct Approach ===== */
@@ -623,56 +675,45 @@
         }
 
         .s5-flow-box {
-            background: #FFF7EF;
-            border: 2px solid #F0D4B0;
+            background: var(--bg-card);
+            border: 1px solid rgba(0,212,255,0.25);
             border-radius: 18px;
             padding: 24px 28px;
             min-width: 200px;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            backdrop-filter: blur(10px);
         }
         .s5-flow-box:hover {
             transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 12px 36px rgba(200,130,60,0.15);
+            box-shadow: 0 12px 36px rgba(0,212,255,0.15);
         }
 
         .s5-flow-box .material-symbols-outlined {
             font-size: 48px;
-            color: #E07A3A;
+            color: var(--accent-primary);
             margin-bottom: 10px;
         }
 
         .s5-flow-box-title {
             font-size: 22px;
             font-weight: 800;
-            color: #2D2A26;
+            color: var(--text-primary);
             margin-bottom: 6px;
         }
 
         .s5-flow-box-desc {
             font-size: 16px;
-            color: #8C7A68;
+            color: var(--text-secondary);
         }
 
         .s5-arrow {
             font-size: 40px;
-            color: #E0A870;
+            color: var(--accent-secondary);
             animation: arrowPulse 2s ease-in-out infinite;
         }
         @keyframes arrowPulse {
             0%, 100% { opacity: 0.5; transform: translateX(0); }
             50% { opacity: 1; transform: translateX(6px); }
-        }
-
-        /* Animated data flow line */
-        .s5-flow-line {
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            right: 10%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #E07A3A, transparent);
-            opacity: 0.15;
-            z-index: 0;
         }
 
         /* ===== SLIDE 6 : Ghostty Case ===== */
@@ -697,7 +738,7 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 120px; height: 120px;
-            background: linear-gradient(135deg, #FFE8CC, #FFD4A8);
+            background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(124,58,237,0.15));
             border-radius: 50%;
             display: flex;
             flex-direction: column;
@@ -705,13 +746,14 @@
             justify-content: center;
             font-weight: 800;
             font-size: 16px;
-            color: #A06030;
-            box-shadow: 0 4px 20px rgba(200,130,60,0.15);
+            color: var(--accent-primary);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.15);
             animation: centerPulse 3s ease-in-out infinite;
+            border: 1px solid rgba(0,212,255,0.3);
         }
         @keyframes centerPulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(200,130,60,0.15); }
-            50% { box-shadow: 0 6px 36px rgba(200,130,60,0.3); }
+            0%, 100% { box-shadow: 0 4px 20px rgba(0,212,255,0.15); }
+            50% { box-shadow: 0 6px 36px rgba(0,212,255,0.3); }
         }
 
         .s6-cycle-node {
@@ -725,29 +767,30 @@
             font-weight: 700;
             font-size: 13px;
             text-align: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         .s6-cycle-node:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
         }
 
         .s6-cycle-node:nth-child(2) {
             top: -10px; left: 50%; transform: translateX(-50%);
-            background: #FFECE4; color: #D4553A;
+            background: rgba(124,58,237,0.15); color: var(--accent-secondary); border: 1px solid rgba(124,58,237,0.3);
         }
         .s6-cycle-node:nth-child(3) {
             top: 50%; right: -10px; transform: translateY(-50%);
-            background: #FFF0E0; color: #C8901A;
+            background: rgba(0,212,255,0.15); color: var(--accent-primary); border: 1px solid rgba(0,212,255,0.3);
         }
         .s6-cycle-node:nth-child(4) {
             bottom: -10px; left: 50%; transform: translateX(-50%);
-            background: #E8F5E9; color: #388E3C;
+            background: rgba(0,230,118,0.15); color: var(--green); border: 1px solid rgba(0,230,118,0.3);
         }
         .s6-cycle-node:nth-child(5) {
             top: 50%; left: -10px; transform: translateY(-50%);
-            background: #E3F2FD; color: #1976D2;
+            background: rgba(33,150,243,0.15); color: #2196F3; border: 1px solid rgba(33,150,243,0.3);
         }
         .s6-cycle-node:nth-child(2):hover { transform: translateX(-50%) scale(1.1); }
         .s6-cycle-node:nth-child(3):hover { transform: translateY(-50%) scale(1.1); }
@@ -773,7 +816,7 @@
             opacity: 0.08;
             pointer-events: none;
             font-size: 80px;
-            color: #E07A3A;
+            color: var(--accent-primary);
             animation: floatY 8s ease-in-out infinite;
         }
         @keyframes floatY {
@@ -785,29 +828,31 @@
 </head>
 <body>
 
-
+<div class="bg-grid"></div>
 
 <div class="slides-wrapper">
 
     <!-- ========== SLIDE 1 : TITLE ========== -->
     <div class="slide active" id="slide-1">
+        <div class="glow-orb" style="width:500px;height:500px;background:var(--accent-primary);top:-100px;right:-100px;"></div>
+        <div class="glow-orb" style="width:400px;height:400px;background:var(--accent-secondary);bottom:-100px;left:-50px;animation-delay:-4s;"></div>
 
-        <div class="deco-circle" style="width:400px;height:400px;background:#F0B060;top:-100px;right:-80px;"></div>
-        <div class="deco-circle" style="width:250px;height:250px;background:#E07A3A;bottom:-60px;left:-40px;"></div>
+        <div class="deco-circle" style="width:400px;height:400px;background:var(--accent-primary);top:-100px;right:-80px;"></div>
+        <div class="deco-circle" style="width:250px;height:250px;background:var(--accent-secondary);bottom:-60px;left:-40px;"></div>
         
         <!-- Floating particles -->
-        <div class="particle" style="width:8px;height:8px;background:#E07A3A;top:20%;left:15%;animation-delay:0s;"></div>
-        <div class="particle" style="width:6px;height:6px;background:#F0B060;top:40%;right:20%;animation-delay:2s;"></div>
-        <div class="particle" style="width:10px;height:10px;background:#D4553A;bottom:30%;left:25%;animation-delay:4s;"></div>
-        <div class="particle" style="width:7px;height:7px;background:#C8901A;top:60%;right:30%;animation-delay:1s;"></div>
+        <div class="particle" style="width:8px;height:8px;background:var(--accent-primary);top:20%;left:15%;animation-delay:0s;"></div>
+        <div class="particle" style="width:6px;height:6px;background:var(--accent-secondary);top:40%;right:20%;animation-delay:2s;"></div>
+        <div class="particle" style="width:10px;height:10px;background:#7c3aed;bottom:30%;left:25%;animation-delay:4s;"></div>
+        <div class="particle" style="width:7px;height:7px;background:#00b0ff;top:60%;right:30%;animation-delay:1s;"></div>
 
         <!-- Shield Graphic -->
         <div class="shield-graphic">
             <svg viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M60 5L10 30V70C10 105 60 145 60 145C60 145 110 105 110 70V30L60 5Z" 
-                      fill="#E07A3A" opacity="0.5"/>
+                      fill="var(--accent-primary)" opacity="0.5"/>
                 <path d="M60 20L25 38V68C25 95 60 128 60 128C60 128 95 95 95 68V38L60 20Z" 
-                      fill="#F0B060" opacity="0.4"/>
+                      fill="var(--accent-secondary)" opacity="0.4"/>
                 <text x="60" y="80" text-anchor="middle" fill="#FFF" font-size="32" font-weight="bold">🛡</text>
             </svg>
         </div>
@@ -826,7 +871,7 @@
             </div>
 
             <div class="anim-item slide-subtitle" style="margin-bottom:8px;">
-                综合三大前沿实践，Harness 可归纳为 <span class="highlight-orange text-bold">四个核心组件</span>
+                综合三大前沿实践，Harness 可归纳为 <span class="highlight-cyan text-bold">四个核心组件</span>
             </div>
 
             <div class="anim-item s1-divider"></div>
@@ -855,8 +900,9 @@
 
     <!-- ========== SLIDE 2 : AGENTS.md ========== -->
     <div class="slide" id="slide-2">
+        <div class="glow-orb" style="width:400px;height:400px;background:var(--accent-secondary);top:-80px;left:-80px;"></div>
 
-        <div class="deco-circle" style="width:350px;height:350px;background:#F0B060;top:-80px;left:-100px;"></div>
+        <div class="deco-circle" style="width:350px;height:350px;background:var(--accent-primary);top:-80px;left:-100px;"></div>
         
         <!-- Floating icon decoration -->
         <div class="float-icon" style="right:40px;bottom:60px;animation-delay:1s;">
@@ -871,11 +917,11 @@
                 </div>
 
                 <div class="anim-item slide-title" style="text-align:left;font-size:46px;">
-                    项目根目录的<br><span class="highlight-orange highlight-bg">AGENTS.md</span>
+                    项目根目录的<br><span class="highlight-cyan highlight-bg">AGENTS.md</span>
                 </div>
 
                 <div class="anim-item s2-text-line">
-                    或 <span class="text-bold highlight-orange">CLAUDE.md</span> 文件
+                    或 <span class="text-bold highlight-cyan">CLAUDE.md</span> 文件
                 </div>
 
                 <div class="anim-item s2-text-line" style="margin-top:16px;">
@@ -888,7 +934,7 @@
 
                 <div class="anim-item" style="margin-top:26px;">
                     <div class="accent-card glow-box" style="font-size:22px;">
-                        <span class="material-symbols-outlined highlight-orange" style="font-size:28px;vertical-align:middle;">lightbulb</span>
+                        <span class="material-symbols-outlined highlight-cyan" style="font-size:28px;vertical-align:middle;">lightbulb</span>
                         <span class="highlight-italic"> 它是写给 AI 看的"项目说明书"</span>
                     </div>
                 </div>
@@ -913,7 +959,7 @@
                         <div class="file-line"><span class="file-line-num">3</span><span class="file-line-text">- 测试先行</span></div>
                         <div class="file-line"><span class="file-line-num">4</span><span class="file-line-text">- 不要修改 API 接口</span></div>
                         <div class="file-line"><span class="file-line-num">5</span><span class="file-line-text">- 错误需要 logging</span></div>
-                        <div class="file-line" style="color:#C8A880;">
+                        <div class="file-line" style="color:var(--text-muted);">
                             <span class="file-line-num">...</span>
                             <span style="font-size:13px;">简洁而精准</span>
                         </div>
@@ -925,8 +971,9 @@
 
     <!-- ========== SLIDE 3 : 60 Lines ========== -->
     <div class="slide" id="slide-3">
+        <div class="glow-orb" style="width:500px;height:500px;background:var(--accent-primary);bottom:-200px;right:-150px;"></div>
 
-        <div class="deco-circle" style="width:500px;height:500px;background:#E07A3A;bottom:-200px;right:-150px;"></div>
+        <div class="deco-circle" style="width:500px;height:500px;background:var(--accent-primary);bottom:-200px;right:-150px;"></div>
 
         <div class="s3-center">
             <div class="anim-item slide-tag">
@@ -935,7 +982,7 @@
             </div>
 
             <div class="anim-item slide-title" style="font-size:48px;">
-                文件<span class="highlight-orange highlight-bg">不能太长</span>
+                文件<span class="highlight-cyan highlight-bg">不能太长</span>
             </div>
 
             <div class="anim-item s3-number-display">
@@ -944,49 +991,49 @@
                 </div>
                 <div class="s3-num-label">
                     行以内<br>
-                    <span style="font-size:20px;color:#8C7A68;font-weight:500;">ETH Zurich 研究建议</span>
+                    <span style="font-size:20px;color:var(--text-secondary);font-weight:500;">ETH Zurich 研究建议</span>
                 </div>
             </div>
 
             <!-- Visual ruler -->
             <div class="anim-item s3-ruler">
-                <div class="s3-ruler-segment" style="width:30%;background:linear-gradient(90deg,#66BB6A,#81C784);border-radius:4px 0 0 4px;">
-                    <span class="s3-ruler-tick" style="color:#43A047;">60行</span>
+                <div class="s3-ruler-segment" style="width:30%;background:linear-gradient(90deg,var(--green),#00c853);border-radius:4px 0 0 4px;">
+                    <span class="s3-ruler-tick" style="color:var(--green);">60行</span>
                 </div>
-                <div class="s3-ruler-segment" style="width:25%;background:linear-gradient(90deg,#FFA726,#FFB74D);">
-                    <span class="s3-ruler-tick" style="color:#F57C00;">100行</span>
+                <div class="s3-ruler-segment" style="width:25%;background:linear-gradient(90deg,var(--orange),#ff9100);">
+                    <span class="s3-ruler-tick" style="color:var(--orange);">100行</span>
                 </div>
-                <div class="s3-ruler-segment" style="width:45%;background:linear-gradient(90deg,#EF5350,#E53935);border-radius:0 4px 4px 0;">
-                    <span class="s3-ruler-tick" style="color:#D32F2F;">200行+</span>
+                <div class="s3-ruler-segment" style="width:45%;background:linear-gradient(90deg,var(--red),#d50000);border-radius:0 4px 4px 0;">
+                    <span class="s3-ruler-tick" style="color:var(--red);">200行+</span>
                 </div>
             </div>
 
             <div class="anim-item s3-bar-container">
                 <div class="s3-bar">
-                    <div class="s3-bar-fill" style="height:80px;background:linear-gradient(180deg,#66BB6A,#43A047);width:90px;"></div>
+                    <div class="s3-bar-fill" style="height:80px;background:linear-gradient(180deg,var(--green),#00c853);width:90px;"></div>
                     <div class="s3-bar-label">≤60行</div>
-                    <div class="s3-bar-status" style="color:#43A047;">
+                    <div class="s3-bar-status" style="color:var(--green);">
                         <span class="material-symbols-outlined" style="font-size:18px;">check_circle</span> 性能佳
                     </div>
                 </div>
                 <div class="s3-bar">
-                    <div class="s3-bar-fill" style="height:120px;background:linear-gradient(180deg,#FFA726,#F57C00);width:90px;"></div>
+                    <div class="s3-bar-fill" style="height:120px;background:linear-gradient(180deg,var(--orange),#ff9100);width:90px;"></div>
                     <div class="s3-bar-label">100行</div>
-                    <div class="s3-bar-status" style="color:#F57C00;">
+                    <div class="s3-bar-status" style="color:var(--orange);">
                         <span class="material-symbols-outlined" style="font-size:18px;">remove_circle</span> 一般
                     </div>
                 </div>
                 <div class="s3-bar">
-                    <div class="s3-bar-fill" style="height:170px;background:linear-gradient(180deg,#EF5350,#D32F2F);width:90px;"></div>
+                    <div class="s3-bar-fill" style="height:170px;background:linear-gradient(180deg,var(--red),#d50000);width:90px;"></div>
                     <div class="s3-bar-label">200行+</div>
-                    <div class="s3-bar-status" style="color:#D32F2F;">
+                    <div class="s3-bar-status" style="color:var(--red);">
                         <span class="material-symbols-outlined" style="font-size:18px;">cancel</span> 性能降
                     </div>
                 </div>
             </div>
 
             <div class="anim-item" style="font-size:26px;margin-top:10px;">
-                <span class="text-bold" style="color:#D4553A;">过长的指令文件</span>反而会<span class="highlight-underline highlight-orange text-bold">降低</span> Agent 表现
+                <span class="text-bold" style="color:var(--accent-secondary);">过长的指令文件</span>反而会<span class="highlight-underline highlight-cyan text-bold">降低</span> Agent 表现
             </div>
 
             <div class="anim-item s3-source-tag">
@@ -1002,8 +1049,9 @@
 
     <!-- ========== SLIDE 4 : Why ========== -->
     <div class="slide" id="slide-4">
+        <div class="glow-orb" style="width:400px;height:400px;background:var(--accent-secondary);top:-60px;right:-60px;"></div>
 
-        <div class="deco-circle" style="width:300px;height:300px;background:#F0B060;top:-60px;right:-60px;"></div>
+        <div class="deco-circle" style="width:300px;height:300px;background:var(--accent-primary);top:-60px;right:-60px;"></div>
 
         <div class="s4-layout">
             <div class="anim-item slide-tag">
@@ -1012,7 +1060,7 @@
             </div>
 
             <div class="anim-item slide-title" style="font-size:48px;">
-                上下文是<span class="highlight-orange highlight-bg">稀缺资源</span>
+                上下文是<span class="highlight-cyan highlight-bg">稀缺资源</span>
             </div>
 
             <div class="anim-item slide-subtitle" style="font-size:24px;">
@@ -1035,26 +1083,26 @@
                 <div class="s4-squeeze-arrow">
                     <span class="material-symbols-outlined" style="font-size:44px;">chevron_left</span>
                 </div>
-                <div class="s4-ctx-block guide" style="border:3px dashed #EF5350;">
+                <div class="s4-ctx-block guide" style="border:3px dashed var(--red);">
                     <span class="material-symbols-outlined" style="font-size:36px;">block</span><br>
                     <s>过多指导</s>
                 </div>
             </div>
 
             <div class="anim-item" style="max-width:800px;margin:0 auto;">
-                <div style="font-size:22px;color:#8C7A68;margin-bottom:12px;">上下文空间分配示意</div>
+                <div style="font-size:22px;color:var(--text-secondary);margin-bottom:12px;">上下文空间分配示意</div>
                 <div class="s4-context-bar">
-                    <div class="s4-bar-fill-good" style="width:35%;background:linear-gradient(90deg,#E07A3A,#F09050);">任务</div>
-                    <div class="s4-bar-fill-good" style="width:30%;left:35%;background:linear-gradient(90deg,#43A047,#66BB6A);">代码</div>
-                    <div class="s4-bar-fill-good" style="width:20%;left:65%;background:linear-gradient(90deg,#1976D2,#42A5F5);">文档</div>
-                    <div class="s4-bar-fill-good" style="width:15%;left:85%;background:linear-gradient(90deg,#EF5350,#E53935);border-radius:0 12px 12px 0;">指导?</div>
+                    <div class="s4-bar-fill-good" style="width:35%;background:linear-gradient(90deg,var(--accent-primary),#00b0ff);">任务</div>
+                    <div class="s4-bar-fill-good" style="width:30%;left:35%;background:linear-gradient(90deg,var(--green),#00c853);">代码</div>
+                    <div class="s4-bar-fill-good" style="width:20%;left:65%;background:linear-gradient(90deg,#2196F3,#42A5F5);">文档</div>
+                    <div class="s4-bar-fill-good" style="width:15%;left:85%;background:linear-gradient(90deg,var(--red),#d50000);border-radius:0 12px 12px 0;">指导?</div>
                 </div>
             </div>
 
             <div class="anim-item accent-card-warm" style="margin:24px auto;text-align:left;">
                 <span style="font-size:24px;">
-                    <span class="material-symbols-outlined highlight-orange" style="font-size:28px;vertical-align:middle;">priority_high</span>
-                    过多的指导 → <span class="text-bold highlight-orange">挤掉</span>任务、代码、文档的空间 → <span class="highlight-italic">性能下降</span>
+                    <span class="material-symbols-outlined highlight-cyan" style="font-size:28px;vertical-align:middle;">priority_high</span>
+                    过多的指导 → <span class="text-bold highlight-cyan">挤掉</span>任务、代码、文档的空间 → <span class="highlight-italic">性能下降</span>
                 </span>
             </div>
 
@@ -1066,17 +1114,18 @@
 
     <!-- ========== SLIDE 5 : Correct Approach ========== -->
     <div class="slide" id="slide-5">
+        <div class="glow-orb" style="width:450px;height:450px;background:var(--green);bottom:-100px;left:-80px;opacity:0.1;"></div>
 
-        <div class="deco-circle" style="width:350px;height:350px;background:#4CAF50;bottom:-100px;left:-80px;opacity:0.06;"></div>
+        <div class="deco-circle" style="width:350px;height:350px;background:var(--green);bottom:-100px;left:-80px;opacity:0.06;"></div>
 
         <div class="s5-layout" style="text-align:center;">
-            <div class="anim-item slide-tag" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9);color:#388E3C;">
+            <div class="anim-item slide-tag" style="background:rgba(0,230,118,0.1);color:var(--green);border-color:rgba(0,230,118,0.25);">
                 <span class="material-symbols-outlined" style="font-size:20px;">check_circle</span>
                 正确做法
             </div>
 
             <div class="anim-item slide-title" style="font-size:46px;">
-                <span class="highlight-orange">小入口</span> + <span style="color:#388E3C;">按需检索</span>
+                <span class="highlight-cyan">小入口</span> + <span style="color:var(--green);">按需检索</span>
             </div>
 
             <div class="anim-item slide-subtitle" style="font-size:22px;">
@@ -1097,8 +1146,8 @@
                 </div>
 
                 <div class="s5-flow-step">
-                    <div class="s5-flow-box glow-box" style="border-color:#A5D6A7;">
-                        <span class="material-symbols-outlined" style="color:#388E3C;">search</span>
+                    <div class="s5-flow-box glow-box" style="border-color:rgba(0,230,118,0.4);">
+                        <span class="material-symbols-outlined" style="color:var(--green);">search</span>
                         <div class="s5-flow-box-title">按需检索</div>
                         <div class="s5-flow-box-desc">根据任务<br>拉取上下文</div>
                     </div>
@@ -1109,8 +1158,8 @@
                 </div>
 
                 <div class="s5-flow-step">
-                    <div class="s5-flow-box glow-box" style="border-color:#90CAF9;">
-                        <span class="material-symbols-outlined" style="color:#1976D2;">auto_awesome</span>
+                    <div class="s5-flow-box glow-box" style="border-color:rgba(33,150,243,0.4);">
+                        <span class="material-symbols-outlined" style="color:#2196F3;">auto_awesome</span>
                         <div class="s5-flow-box-title">精准执行</div>
                         <div class="s5-flow-box-desc">上下文充足<br>高质量输出</div>
                     </div>
@@ -1119,8 +1168,8 @@
 
             <div class="anim-item accent-card-warm" style="margin:10px auto;text-align:center;max-width:700px;">
                 <span style="font-size:24px;">
-                    <span class="material-symbols-outlined" style="color:#388E3C;font-size:28px;vertical-align:middle;">eco</span>
-                    <span class="text-bold">核心理念：</span>不是一次塞满，而是<span class="highlight-bg text-bold highlight-orange">教会 Agent 自己找</span>
+                    <span class="material-symbols-outlined" style="color:var(--green);font-size:28px;vertical-align:middle;">eco</span>
+                    <span class="text-bold">核心理念：</span>不是一次塞满，而是<span class="highlight-bg text-bold highlight-cyan">教会 Agent 自己找</span>
                 </span>
             </div>
 
@@ -1132,8 +1181,9 @@
 
     <!-- ========== SLIDE 6 : Ghostty Case ========== -->
     <div class="slide" id="slide-6">
+        <div class="glow-orb" style="width:400px;height:400px;background:var(--accent-primary);top:-80px;left:-60px;"></div>
 
-        <div class="deco-circle" style="width:300px;height:300px;background:#E07A3A;top:-80px;left:-60px;"></div>
+        <div class="deco-circle" style="width:300px;height:300px;background:var(--accent-secondary);top:-80px;left:-60px;"></div>
 
         <div class="s6-layout">
             <div class="s6-left">
@@ -1143,11 +1193,11 @@
                 </div>
 
                 <div class="anim-item slide-title" style="text-align:left;font-size:44px;">
-                    <span class="highlight-orange">Ghostty</span> 的实践
+                    <span class="highlight-cyan">Ghostty</span> 的实践
                 </div>
 
                 <div class="anim-item s6-text-line">
-                    开源终端模拟器 <span class="text-bold highlight-orange">Ghostty</span>
+                    开源终端模拟器 <span class="text-bold highlight-cyan">Ghostty</span>
                 </div>
 
                 <div class="anim-item s6-text-line">
@@ -1160,7 +1210,7 @@
 
                 <div class="anim-item" style="margin-top:24px;">
                     <div class="accent-card glow-box" style="font-size:20px;">
-                        <span class="material-symbols-outlined highlight-orange" style="font-size:24px;vertical-align:middle;">tips_and_updates</span>
+                        <span class="material-symbols-outlined highlight-cyan" style="font-size:24px;vertical-align:middle;">tips_and_updates</span>
                         <span class="highlight-italic"> 将规则按模块拆分，按需组合加载</span>
                     </div>
                 </div>
@@ -1197,9 +1247,9 @@
 
                     <!-- Connecting circle -->
                     <svg class="s6-cycle-arrow-svg" viewBox="0 0 320 320">
-                        <circle cx="160" cy="160" r="130" fill="none" stroke="#F0D4B0" stroke-width="2" stroke-dasharray="8 6" opacity="0.5"/>
+                        <circle cx="160" cy="160" r="130" fill="none" stroke="rgba(0,212,255,0.2)" stroke-width="2" stroke-dasharray="8 6" opacity="0.5"/>
                         <!-- Animated rotating circle -->
-                        <circle cx="160" cy="160" r="130" fill="none" stroke="#E07A3A" stroke-width="2.5" stroke-dasharray="40 320" stroke-linecap="round" opacity="0.6">
+                        <circle cx="160" cy="160" r="130" fill="none" stroke="var(--accent-primary)" stroke-width="2.5" stroke-dasharray="40 320" stroke-linecap="round" opacity="0.6">
                             <animateTransform attributeName="transform" type="rotate" dur="8s" from="0 160 160" to="360 160 160" repeatCount="indefinite"/>
                         </circle>
                     </svg>
