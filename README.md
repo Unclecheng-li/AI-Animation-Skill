@@ -159,12 +159,15 @@ AI-Animation-Skill/
 
 ### PPT 风格（Level2 模板重构后）
 
-<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/6ffb76f6-0dea-4b02-b983-617a284b9c80" />
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/e28ccecf-2632-40f3-b239-c0dd7909af97" />
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/9efad557-81e2-49d3-9226-d5ce98b84075" />
+
 <img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/8c1be8cc-8293-4893-8b56-b695e5daf6fe" />
 
 ### 流程图风格（Animation 模板重构后）
 
 <img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/5a65dd82-b690-4d1a-87ba-1b6196b01273" />
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/f7481d36-44b1-439e-8b3d-ec6def4795e1" />
 
 ---
 
